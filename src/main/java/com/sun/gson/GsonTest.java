@@ -41,11 +41,11 @@ public class GsonTest {
 		t.setName("test");
 		t.setId(12);
 
-		// builder
+		// step2 重写 builder
 		GsonBuilder builder = new GsonBuilder();
 		builder.setDateFormat("yyyy-MM-dd HH:mm:ss");// 日期格式化
 		builder.serializeSpecialFloatingPointValues();
-		builder.addSerializationExclusionStrategy(new ExclusionStrategy() {
+		builder.addSerializationExclusionStrategy(new ExclusionStrategy() {// 序列化策略
 
 			public boolean shouldSkipField(FieldAttributes fieldAttributes) {
 				final Expose expose = fieldAttributes.getAnnotation(Expose.class);
@@ -55,7 +55,7 @@ public class GsonTest {
 			public boolean shouldSkipClass(Class<?> aClass) {
 				return false;
 			}
-		}).addDeserializationExclusionStrategy(new ExclusionStrategy() {
+		}).addDeserializationExclusionStrategy(new ExclusionStrategy() {// 反序列化策略
 
 			public boolean shouldSkipField(FieldAttributes fieldAttributes) {
 				final Expose expose = fieldAttributes.getAnnotation(Expose.class);
@@ -66,8 +66,9 @@ public class GsonTest {
 				return false;
 			}
 		});
-
+		// step3 用builder创建gson
 		Gson gson = builder.create();
+		// step4 gson转换json字符串
 		String str = gson.toJson(t);
 		System.out.println(str);
 	}
