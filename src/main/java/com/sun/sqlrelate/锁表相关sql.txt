@@ -1,0 +1,9 @@
+--锁表查询
+select object_name,machine,s.sid,s.serial#
+from gv$locked_object l,dba_objects o,gv$session s
+where l.OBJECT_ID = o.object_id
+and l.SESSION_ID = s.SID
+
+--解锁
+--alter system kill session 'sid,serial#'
+alter system kill session '159,40749';
