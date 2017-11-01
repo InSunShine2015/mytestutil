@@ -74,7 +74,7 @@ public class SentinalRedis {
 		log.info("init Redis sentinel Pool....");
 		Set<String> sentinels = new HashSet<String>();
 		String[] ips = sentinelIp.split(",");
-		for (String ip : ips) {
+		for (String ip : ips) {//可以添加多个哨兵
 			sentinels.add(new HostAndPort(ip, sentinelPort).toString());
 		}
 		GenericObjectPoolConfig config = new GenericObjectPoolConfig();
