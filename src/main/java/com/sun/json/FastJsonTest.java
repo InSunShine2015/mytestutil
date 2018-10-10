@@ -13,6 +13,9 @@ public class FastJsonTest {
 		m.setDate(new Date());
 		m.setName("aa");
 		m.setAge(16);
+		m.setOther("wo-other");
+		m.setChange("this is change field");
+		m.setFieldName("fieldName");
 		System.out.println(JSON.toJSONString(m,SerializerFeature.PrettyFormat));
 	}
 	
@@ -24,13 +27,22 @@ class TestModel{
 	@JSONField(format="yyyy-MM-dd HH:mm:ss")
 	private Date date;
 	@JSONField(serialize=false)
-	private Integer age;
+	private Integer age;//json忽略字段
 	@JSONField(serialzeFeatures=SerializerFeature.WriteNullStringAsEmpty)
 	private String other;
 
-	private String change;
+	private String change;//json忽略字段
+	
+	@JSONField(serialize=false)
+	private String fieldName;//json忽略字段
 	
 	
+	public String getFieldName() {
+		return fieldName;
+	}
+	public void setFieldName(String fieldName) {
+		this.fieldName = fieldName;
+	}
 	public String getChange() {
 		return change;
 	}
